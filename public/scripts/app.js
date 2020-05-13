@@ -2,34 +2,48 @@
 
 console.log('App.js is running!');
 
+var app = {
+    title: 'Indecision App',
+    subtitle: 'Put your life in the hands of a computer',
+    options: ['One', 'Two']
+};
+
 var template = React.createElement(
     'div',
     null,
     React.createElement(
         'h1',
         null,
-        'Indecision App'
+        app.title
+    ),
+    app.subtitle && React.createElement(
+        'p',
+        null,
+        app.subtitle
     ),
     React.createElement(
         'p',
         null,
-        'This is some info'
-    ),
-    React.createElement(
-        'ol',
-        null,
-        React.createElement(
-            'li',
-            null,
-            'Item one'
-        ),
-        React.createElement(
-            'li',
-            null,
-            'Item two'
-        )
+        app.options.length > 0 ? "Here are your options" : "No options"
     )
 );
+
+var user = {
+    name: 'Mike',
+    age: 18,
+    location: 'Los Angeles'
+};
+
+function getLocation(location) {
+    if (location) {
+        return React.createElement(
+            'p',
+            null,
+            'Location: ',
+            location
+        );
+    }
+};
 
 var template2 = React.createElement(
     'div',
@@ -37,36 +51,18 @@ var template2 = React.createElement(
     React.createElement(
         'h1',
         null,
-        'This is my new header!'
+        user.name ? user.name : 'Anonymous'
     ),
-    React.createElement(
+    user.age && user.age >= 18 && React.createElement(
         'p',
         null,
-        'This is my new body text!'
+        'Age: ',
+        user.age
     ),
-    React.createElement(
-        'ol',
-        null,
-        React.createElement(
-            'li',
-            null,
-            'This is my first item'
-        ),
-        React.createElement(
-            'li',
-            null,
-            'Second Item!!!'
-        ),
-        React.createElement(
-            'li',
-            null,
-            'Third Item!!!'
-        )
-    )
+    getLocation(user.location)
 );
 
 var appRoot = document.getElementById('app');
 
-//ReactDOM.render(template, appRoot)
-ReactDOM.render(template2, appRoot);
+ReactDOM.render(template, appRoot);
 //# sourceMappingURL=app.js.map

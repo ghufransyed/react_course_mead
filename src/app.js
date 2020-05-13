@@ -1,30 +1,42 @@
 console.log('App.js is running!');
 
-var template = (
-    <div>
-        <h1>Indecision App</h1>
-        <p>This is some info</p>
-        <ol>
-            <li>Item one</li>
-            <li>Item two</li>
-        </ol>
-    </div>
-);
+const app = {
+    title: 'Indecision App',
+    subtitle: 'Put your life in the hands of a computer',
+    options:  ['One', 'Two']
+};
 
-var template2 = (
+const template = (
     <div>
-        <h1>This is my new header!</h1>
-        <p>This is my new body text!</p>
-        <ol>
-            <li>This is my first item</li>
-            <li>Second Item!!!</li>
-            <li>Third Item!!!</li>
-        </ol>
+        <h1>{app.title}</h1>
+        {app.subtitle && <p>{app.subtitle}</p>}
+        <p>{app.options.length > 0 ? "Here are your options" : "No options"}</p>
     </div>
 );
 
 
-var appRoot = document.getElementById('app');
+const user = {
+    name: 'Mike',
+    age: 18,
+    location:'Los Angeles'
+};
 
-//ReactDOM.render(template, appRoot)
-ReactDOM.render(template2, appRoot)
+
+function getLocation(location) {
+    if (location){
+        return <p>Location: {location}</p>
+    }
+};
+
+const template2 = (
+    <div>
+        <h1>{user.name ? user.name : 'Anonymous'}</h1>
+        {(user.age && user.age >= 18) && <p>Age: {user.age}</p>}
+       {getLocation(user.location)}
+    </div>
+);
+
+
+const appRoot = document.getElementById('app');
+
+ReactDOM.render(template, appRoot);
