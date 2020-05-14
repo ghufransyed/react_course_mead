@@ -28,41 +28,66 @@ var template = React.createElement(
     )
 );
 
-var user = {
-    name: 'Mike',
-    age: 18,
-    location: 'Los Angeles'
+var counter = 0;
+
+var addOne = function addOne() {
+    counter++;
+    renderCounterApp();
+};
+var minusOne = function minusOne() {
+    counter--;
+    renderCounterApp();
 };
 
-function getLocation(location) {
-    if (location) {
-        return React.createElement(
-            'p',
-            null,
-            'Location: ',
-            location
-        );
-    }
+var resetCounter = function resetCounter() {
+    counter = 0;
+    renderCounterApp();
 };
-
-var template2 = React.createElement(
-    'div',
-    null,
-    React.createElement(
-        'h1',
-        null,
-        user.name ? user.name : 'Anonymous'
-    ),
-    user.age && user.age >= 18 && React.createElement(
-        'p',
-        null,
-        'Age: ',
-        user.age
-    ),
-    getLocation(user.location)
-);
 
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(template, appRoot);
+var renderCounterApp = function renderCounterApp() {
+    var templateTwo = React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'h1',
+            null,
+            'Counter ',
+            counter
+        ),
+        React.createElement(
+            'span',
+            null,
+            React.createElement(
+                'button',
+                { id: 'buttonPlus',
+                    className: 'button',
+                    onClick: addOne
+                },
+                '+1'
+            ),
+            React.createElement(
+                'button',
+                { id: 'buttonMinus',
+                    className: 'button',
+                    onClick: minusOne
+                },
+                '-1'
+            ),
+            React.createElement(
+                'button',
+                { id: 'buttonReset',
+                    className: 'button',
+                    onClick: resetCounter
+                },
+                'Reset'
+            )
+        )
+    );
+
+    ReactDOM.render(templateTwo, appRoot);
+};
+
+renderCounterApp();
 //# sourceMappingURL=app.js.map
