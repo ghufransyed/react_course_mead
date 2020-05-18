@@ -20,4 +20,3 @@ var getFirstname = function getFirstname(fullName) {
 };
 
 console.log(getFirstname('foobar smith'));
-//# sourceMappingURL=es6-arrow-function.js.map

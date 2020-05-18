@@ -32,4 +32,3 @@ if (fullName) {
 }
 
 console.log(firstName);
-//# sourceMappingURL=es6-let-const.js.map

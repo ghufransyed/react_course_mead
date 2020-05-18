@@ -35,4 +35,3 @@ var multiplier = {
 
 console.log('Numbers: ' + multiplier.numbers);
 console.log('multiply(): ' + multiplier.multiply());
-//# sourceMappingURL=es6-arrow-function-2.js.map

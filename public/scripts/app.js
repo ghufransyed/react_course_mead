@@ -92,4 +92,3 @@ var render = function render() {
 };
 
 render();
-//# sourceMappingURL=app.js.map

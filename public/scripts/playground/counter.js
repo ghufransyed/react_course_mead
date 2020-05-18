@@ -62,4 +62,3 @@ var renderCounterApp = function renderCounterApp() {
 };
 
 renderCounterApp();
-//# sourceMappingURL=counter.js.map
