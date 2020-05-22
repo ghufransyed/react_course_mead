@@ -103,3 +103,4 @@ var other = new Traveller();
 
 console.log(me.getGreeting());
 console.log(other.getGreeting());
+//# sourceMappingURL=es6-classes-1.js.map

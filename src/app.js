@@ -3,8 +3,6 @@ const title = "Indecision";
 const subtitle = "Put your life in the hands of a computer"
 let options = ['Thing One','Thing Two','Thing Three'];
 
-let event = undefined;
-
 
 class IndecisionApp extends React.Component {
     render() {
@@ -46,14 +44,23 @@ class Action extends React.Component {
 
 
 class Options extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleRemoveAll = this.handleRemoveAll.bind(this);
+    }
+
+
     handleRemoveAll(){
-        console.log('removeAll');
+
+        console.log(this.props.options);
+        // console.log('removeAll');
     }
     render() {
         return (
 
         <div>
-            <button onClick={this.handleRemoveAll}>Remove All</button>
+            <button onClick={this.handleRemoveAll}>
+                Remove All</button>
             {this.props.options.map((option,i) => {
                 return <Option option={option} key={i}   /> ;
             })}
