@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -26,62 +26,61 @@ var Counter = function (_React$Component) {
     }
 
     _createClass(Counter, [{
-        key: 'handleAddOne',
+        key: "handleAddOne",
         value: function handleAddOne() {
             this.setState(function (prevState) {
-                return {
-                    count: prevState.count + 1
-                }; //
+                return { count: prevState.count + 1 };
             });
-            console.log(this.state.count);
         }
     }, {
-        key: 'handleMinusOne',
+        key: "handleMinusOne",
         value: function handleMinusOne() {
-            console.log('handleMinusOne');
-            this.state.count -= 1;
+            this.setState(function (prevState) {
+                return { count: prevState.count - 1 };
+            });
         }
     }, {
-        key: 'handleReset',
+        key: "handleReset",
         value: function handleReset() {
-            console.log('handleReset');
-            this.state.count = 0;
+            this.setState(function () {
+                return { count: 0 };
+            });
         }
     }, {
-        key: 'render',
+        key: "render",
         value: function render() {
             return React.createElement(
-                'div',
+                "div",
                 null,
                 React.createElement(
-                    'h1',
+                    "h1",
                     null,
-                    'Count: ',
+                    "Count: ",
                     this.state.count
                 ),
                 React.createElement(
-                    'span',
+                    "span",
                     null,
                     React.createElement(
-                        'button',
-                        { id: 'buttonPlus',
-                            className: 'button',
+                        "button",
+                        { id: "buttonPlus",
+                            className: "button",
                             onClick: this.handleAddOne },
-                        '+1'
+                        "+1"
                     ),
                     React.createElement(
-                        'button',
-                        { id: 'buttonMinus',
-                            className: 'button',
+                        "button",
+                        { id: "buttonMinus",
+                            className: "button",
                             onClick: this.handleMinusOne },
-                        '-1'
+                        "-1"
                     ),
                     React.createElement(
-                        'button',
-                        { id: 'buttonReset',
-                            className: 'button',
+                        "button",
+                        { id: "buttonReset",
+                            className: "button",
                             onClick: this.handleReset },
-                        'Reset'
+                        "Reset"
                     )
                 )
             );
@@ -94,51 +93,4 @@ var Counter = function (_React$Component) {
 ;
 
 ReactDOM.render(React.createElement(Counter, null), document.getElementById('app'));
-
-//let counter = 0;
-//
-//const addOne = () => {
-//    counter++ ;
-//    renderCounterApp();
-//}
-//const minusOne = () => {
-//    counter--;
-//    renderCounterApp();
-//}
-//
-//const resetCounter = () => {
-//    counter = 0;
-//    renderCounterApp();
-//}
-//
-//
-//const appRoot = document.getElementById('app');
-//
-//
-//
-//const renderCounterApp = () => {
-//    const templateTwo = (
-//        <div>
-//            <h1>Counter {counter}</h1>
-//            <span>
-//            <button id="buttonPlus"
-//                    className="button"
-//                    onClick={addOne}
-//            >+1</button>
-//            <button id="buttonMinus"
-//                    className="button"
-//                    onClick={minusOne}
-//            >-1</button>
-//            <button id="buttonReset"
-//                    className="button"
-//                    onClick={resetCounter}
-//            >Reset</button>
-//        </span>
-//        </div>
-//    );
-//
-//    ReactDOM.render(templateTwo, appRoot);
-//}
-//
-//renderCounterApp();
 //# sourceMappingURL=counter.js.map
