@@ -1,6 +1,22 @@
-
-
 class Counter extends React.Component{
+    constructor() {
+        super();
+        this.handleAddOne=this.handleAddOne.bind(this);
+        this.handleMinusOne=this.handleMinusOne.bind(this);
+        this.handleReset=this.handleReset.bind(this);
+    }
+
+    handleAddOne(){
+        console.log('handleAddOne');
+    };
+
+    handleMinusOne(){
+        console.log('handleMinusOne');
+    };
+
+    handleReset(){
+        console.log('handleReset');
+    };
 
     render() {
         return (
@@ -8,11 +24,14 @@ class Counter extends React.Component{
                 <h1>Count: </h1>
                 <span>
                 <button id="buttonPlus"
-                        className="button">+1</button>
+                        className="button"
+                        onClick={this.handleAddOne}>+1</button>
                 <button id="buttonMinus"
-                        className="button">-1</button>
+                        className="button"
+                        onClick={this.handleMinusOne}>-1</button>
                 <button id="buttonReset"
-                        className="button">Reset</button>
+                        className="button"
+                        onClick={this.handleReset}>Reset</button>
             </span>
             </div>
             )
@@ -21,6 +40,7 @@ class Counter extends React.Component{
 
 
 ReactDOM.render(<Counter />, document.getElementById('app'));
+
 
 
 
