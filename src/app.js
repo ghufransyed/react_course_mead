@@ -19,11 +19,7 @@ class IndecisionApp extends React.Component {
     }
 
     handleDeleteOptions() {
-       this.setState( () => {
-           return {
-               options: []
-           }
-       })
+        this.setState(() => ({ options: [] }));
     };
 
     handleAddOption(newOption) {
@@ -33,11 +29,9 @@ class IndecisionApp extends React.Component {
             return 'This item already exists';
         }
 
-        this.setState( (prevState) => {
-            return {
+        this.setState( (prevState) => ({
                 options: [...prevState.options, newOption]
-            }
-        });
+        }));
     };
 
     render() {
@@ -137,9 +131,7 @@ class AddOption extends React.Component {
         e.target.elements.addOption.value = '';
         const error = this.props.handleAddOption(newOption);
 
-        this.setState(() => {
-            return { error }; // same as return { error: this.error }
-        });
+        this.setState(() => ({ error }));
 
     };
 
