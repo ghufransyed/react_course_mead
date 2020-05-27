@@ -20,7 +20,7 @@ var Counter = function (_React$Component) {
         _this.handleMinusOne = _this.handleMinusOne.bind(_this);
         _this.handleReset = _this.handleReset.bind(_this);
         _this.state = {
-            count: 0
+            count: props.counter
         };
         return _this;
     }
@@ -92,5 +92,9 @@ var Counter = function (_React$Component) {
 
 ;
 
-ReactDOM.render(React.createElement(Counter, null), document.getElementById('app'));
+Counter.defaultProps = {
+    counter: 0
+};
+
+ReactDOM.render(React.createElement(Counter, { counter: 22 }), document.getElementById('app'));
 //# sourceMappingURL=counter.js.map
