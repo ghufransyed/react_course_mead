@@ -24,6 +24,7 @@ var IndecisionApp = function (_React$Component) {
         _this.handlePick = _this.handlePick.bind(_this);
         _this.handleDeleteOptions = _this.handleDeleteOptions.bind(_this);
         _this.handleAddOption = _this.handleAddOption.bind(_this);
+        _this.handleRemoveOption = _this.handleRemoveOption.bind(_this);
         return _this;
     }
 
@@ -34,10 +35,51 @@ var IndecisionApp = function (_React$Component) {
             console.log(this.state.options[pick]);
         }
     }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            try {
+                var json = localStorage.getItem('options');
+                var options = JSON.parse(json);
+                if (options) {
+                    this.setState(function () {
+                        return { options: options };
+                    });
+                }
+            } catch (e) {
+                // Do nothing
+            }
+        }
+    }, {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(prevProps, prevState) {
+            if (prevState.options.length !== this.state.options.length) {
+                var json = JSON.stringify(this.state.options);
+                localStorage.setItem('options', json);
+                console.log('saving data');
+            }
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            console.log('componentWillUnmount');
+        }
+    }, {
         key: 'handleDeleteOptions',
         value: function handleDeleteOptions() {
             this.setState(function () {
                 return { options: [] };
+            });
+        }
+    }, {
+        key: 'handleRemoveOption',
+        value: function handleRemoveOption(optionToRemove) {
+            this.setState(function (prevState) {
+                return {
+                    options: prevState.options.filter(function (option) {
+                        return option !== optionToRemove;
+                    })
+
+                };
             });
         }
     }, {
@@ -73,6 +115,7 @@ var IndecisionApp = function (_React$Component) {
                 React.createElement(Options, {
                     options: this.state.options,
                     handleDeleteOptions: this.handleDeleteOptions,
+                    handleRemoveOption: this.handleRemoveOption,
                     hasOptions: this.state.options.length > 0
                 }),
                 React.createElement(AddOption, {
@@ -137,8 +180,17 @@ var Options = function Options(props) {
             },
             'Remove All'
         ),
+        props.options.length === 0 && React.createElement(
+            'p',
+            null,
+            'Please add an option to get started!'
+        ),
         props.options.map(function (option, i) {
-            return React.createElement(Option, { option: option, key: i });
+            return React.createElement(Option, {
+                option: option,
+                key: i,
+                handleRemoveOption: props.handleRemoveOption
+            });
         })
     );
 };
@@ -147,10 +199,15 @@ var Option = function Option(props) {
     return React.createElement(
         'div',
         null,
+        props.option,
         React.createElement(
-            'p',
-            null,
-            props.option
+            'button',
+            {
+                onClick: function onClick(e) {
+                    return props.handleRemoveOption(props.option);
+                }
+            },
+            'Remove'
         )
     );
 };
@@ -176,12 +233,15 @@ var AddOption = function (_React$Component2) {
             //debugger;
             e.preventDefault();
             var newOption = e.target.elements.addOption.value.trim();
-            e.target.elements.addOption.value = '';
             var error = this.props.handleAddOption(newOption);
 
             this.setState(function () {
                 return { error: error };
             });
+
+            if (!error) {
+                e.target.elements.addOption.value = '';
+            };
         }
     }, {
         key: 'render',
