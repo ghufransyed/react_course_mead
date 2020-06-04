@@ -1,7 +1,7 @@
-import {Option} from "./Option";
+import Option from "./Option";
 import React from "react";
 
-export const Options = (props) => {
+const Options = (props) => {
     return (
         <div>
             <button
@@ -26,3 +26,5 @@ export const Options = (props) => {
         </div>
     );
 }
+
+export { Options as default };

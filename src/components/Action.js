@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Action = (props) => {
+const Action = (props) => {
     return (
         <div>
             <button
@@ -12,3 +12,5 @@ export const Action = (props) => {
         </div>
     )
 };
+
+export { Action as default };

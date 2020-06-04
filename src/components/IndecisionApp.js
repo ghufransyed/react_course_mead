@@ -1,10 +1,10 @@
 import React from "react";
-import {Header} from "./Header";
-import {Action} from "./Action";
-import {Options} from "./Options";
-import {AddOption} from "./AddOption";
+import Header from "./Header";
+import Action from "./Action";
+import Options from "./Options";
+import AddOption from "./AddOption";
 
-export class IndecisionApp extends React.Component {
+class IndecisionApp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -103,3 +103,5 @@ export class IndecisionApp extends React.Component {
 IndecisionApp.defaultProps = {
     options: []
 }
+
+export { IndecisionApp as default }

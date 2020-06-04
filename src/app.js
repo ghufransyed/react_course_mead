@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {IndecisionApp} from "./Indecision";
+import IndecisionApp from "./components/IndecisionApp";
 
 
 ReactDOM.render(<IndecisionApp/>,
