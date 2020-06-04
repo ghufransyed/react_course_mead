@@ -5,17 +5,9 @@ import Options from "./Options";
 import AddOption from "./AddOption";
 
 class IndecisionApp extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            options: props.options
-        }
-    }
-
-    static defaultProps = {
+    state = {
         options: []
-    }
-
+    };
 
     handlePick = () => {
         let pick = Math.floor(Math.random() *
@@ -23,34 +15,11 @@ class IndecisionApp extends React.Component {
         console.log(this.state.options[pick])
     }
 
-    componentDidMount = () => {
-        try {
-            const json = localStorage.getItem('options');
-            const options = JSON.parse(json);
-            if (options) {
-                this.setState(() => ({options}));
-            }
-        } catch (e) {
-            // Do nothing
-            console.log(e.message);
-        }
-    }
 
-    componentDidUpdate = (prevProps, prevState) => {
-        if (prevState.options.length !== this.state.options.length) {
-            const json = JSON.stringify(this.state.options);
-            localStorage.setItem('options', json);
-            console.log('saving data');
-        }
-    }
-
-    componentWillUnmount = () => {
-        console.log('componentWillUnmount');
-    }
-
-    handleDeleteOptions = () =>  {
+    handleDeleteOptions = () => {
         this.setState(() => ({options: []}));
     };
+
 
     handleRemoveOption = (optionToRemove) => {
         this.setState((prevState) => {
@@ -63,6 +32,7 @@ class IndecisionApp extends React.Component {
         })
     }
 
+
     handleAddOption = (newOption) =>  {
         if (!newOption) {
             return 'Enter valid value to add item';
@@ -74,6 +44,35 @@ class IndecisionApp extends React.Component {
             options: [...prevState.options, newOption]
         }));
     };
+
+
+    componentDidMount() {
+        try {
+            const json = localStorage.getItem('options');
+            const options = JSON.parse(json);
+            if (options) {
+                this.setState(() => ({options}));
+            }
+        } catch (e) {
+            // Do nothing
+            console.log(e.message);
+        }
+    }
+
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.options.length !== this.state.options.length) {
+            const json = JSON.stringify(this.state.options);
+            localStorage.setItem('options', json);
+            console.log('saving data');
+        }
+    }
+
+
+    componentWillUnmount() {
+        console.log('componentWillUnmount');
+    }
+
 
     render() {
         const subtitle = "Put your life in the hands of a computer"
@@ -100,7 +99,6 @@ class IndecisionApp extends React.Component {
         )
     }
 }
-
 
 
 export { IndecisionApp as default }
