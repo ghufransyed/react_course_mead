@@ -10,19 +10,20 @@ class IndecisionApp extends React.Component {
         this.state = {
             options: props.options
         }
-        this.handlePick = this.handlePick.bind(this);
-        this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
-        this.handleAddOption = this.handleAddOption.bind(this);
-        this.handleRemoveOption = this.handleRemoveOption.bind(this);
     }
 
-    handlePick() {
+    static defaultProps = {
+        options: []
+    }
+
+
+    handlePick = () => {
         let pick = Math.floor(Math.random() *
             this.state.options.length);
         console.log(this.state.options[pick])
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         try {
             const json = localStorage.getItem('options');
             const options = JSON.parse(json);
@@ -35,7 +36,7 @@ class IndecisionApp extends React.Component {
         }
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate = (prevProps, prevState) => {
         if (prevState.options.length !== this.state.options.length) {
             const json = JSON.stringify(this.state.options);
             localStorage.setItem('options', json);
@@ -43,15 +44,15 @@ class IndecisionApp extends React.Component {
         }
     }
 
-    componentWillUnmount() {
+    componentWillUnmount = () => {
         console.log('componentWillUnmount');
     }
 
-    handleDeleteOptions() {
+    handleDeleteOptions = () =>  {
         this.setState(() => ({options: []}));
     };
 
-    handleRemoveOption(optionToRemove) {
+    handleRemoveOption = (optionToRemove) => {
         this.setState((prevState) => {
             return {
                 options: prevState.options.filter(
@@ -62,7 +63,7 @@ class IndecisionApp extends React.Component {
         })
     }
 
-    handleAddOption(newOption) {
+    handleAddOption = (newOption) =>  {
         if (!newOption) {
             return 'Enter valid value to add item';
         } else if (this.state.options.indexOf(newOption) > -1) {
@@ -100,8 +101,6 @@ class IndecisionApp extends React.Component {
     }
 }
 
-IndecisionApp.defaultProps = {
-    options: []
-}
+
 
 export { IndecisionApp as default }
