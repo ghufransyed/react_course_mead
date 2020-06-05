@@ -5,6 +5,7 @@ const Options = (props) => {
     return (
         <div>
             <button
+                id='remove-all'
                 onClick={props.handleDeleteOptions}
                 disabled={!props.hasOptions}
             >
@@ -12,11 +13,12 @@ const Options = (props) => {
             </button>
 
             {props.options.length === 0 &&
-            <p>Please add an option to get started!</p>}
+            <p id='get-started-msg'>Please add an option to get started!</p>}
 
             {props.options.map((option, i) => {
                 return (
                     <Option
+                        id={i}
                         option={option}
                         key={i}
                         handleRemoveOption={props.handleRemoveOption}
