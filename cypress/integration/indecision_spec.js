@@ -1,19 +1,14 @@
-/*
-describe('My First Test', () => {
-    it('Does not do much!', () => {
-        expect(true).to.equal(true)
-    })
-})
+const target_url = 'http://localhost:8080'
+const input1 = 'one'
+const input2 = 'two'
+const input3 = 'three'
+const inputs = [input1,input2,input3]
 
-describe('My First Test', () => {
-    it('Does not do much!', () => {
-        expect(true).to.equal(false)
-    })
-})*/
+
 
 describe('Initial State', () => {
     it('Checks initial state', () => {
-        cy.visit('http://localhost:8080')
+        cy.visit(target_url)
         cy.clearLocalStorage()
         cy.contains('Indecision')
         cy.contains('Put your life in the hands of a computer')
@@ -30,13 +25,10 @@ describe('Initial State', () => {
     })
 })
 
-const input1 = 'one'
-const input2 = 'two'
-const input3 = 'three'
 
 describe('Add Option', () => {
     it('New option is rendered', () => {
-        cy.visit('http://localhost:8080')
+        cy.visit(target_url)
         cy.clearLocalStorage()
         cy.get('#input-addOption').type(input1)
         cy.get('#form-addOption').submit()
@@ -50,7 +42,7 @@ describe('Add Option', () => {
 
 describe('Add Empty and duplicate Option', () => {
     it('Gives error messages', () => {
-        cy.visit('http://localhost:8080')
+        cy.visit(target_url)
         cy.clearLocalStorage()
         cy.get('#form-addOption').submit()
         cy.contains('Enter valid value to add item')
@@ -77,7 +69,7 @@ describe('Add Empty and duplicate Option', () => {
 
 describe('Test options', () => {
     it('every option has a remove button', () => {
-        cy.visit('http://localhost:8080')
+        cy.visit(target_url)
         cy.clearLocalStorage()
         cy.get('#input-addOption').type(input1)
         cy.get('#form-addOption').submit()
@@ -104,7 +96,7 @@ describe('Test options', () => {
     })
 
     it('each option can be removed', () => {
-        cy.visit('http://localhost:8080')
+        cy.visit(target_url)
         cy.clearLocalStorage()
         cy.get('#input-addOption').type(input1)
         cy.get('#form-addOption').submit()
@@ -128,7 +120,7 @@ describe('Test options', () => {
 
 
     it('"Remove all" works', () => {
-        cy.visit('http://localhost:8080')
+        cy.visit(target_url)
         cy.clearLocalStorage()
         cy.get('#input-addOption').type(input1)
         cy.get('#form-addOption').submit()
@@ -149,7 +141,70 @@ describe('Test options', () => {
 
     })
 
+    it('Option Modal works', () => {
+        cy.visit(target_url)
+        cy.clearLocalStorage()
+        cy.get('#input-addOption').type(input1)
+        cy.get('#form-addOption').submit()
+        cy.get('#input-addOption').type(input2)
+        cy.get('#form-addOption').submit()
+        cy.get('#input-addOption').type(input3)
+        cy.get('#form-addOption').submit()
+        cy.contains(input1)
+        cy.contains(input2)
+        cy.contains(input3)
 
+        cy.get('#what-do').click()
+        cy.contains('Selected Option')
+        cy.get('#picked-option')
+            .should(($p) => {
+            const text = $p.text()
+            expect(text)
+                .to.be.oneOf(JSON.parse(
+                    localStorage.getItem('options')))
+            }
+        )
+
+        cy.get('#closeModal')
+            .contains("Okay")
+            .click()
+        cy.contains('Selected Option')
+            .should('not.exist')
+        cy.get('#closeModal')
+            .should('not.exist')
+
+
+    })
+
+    it('Option Modal closes with ESC or clicking background',() => {
+        cy.visit(target_url)
+        cy.clearLocalStorage()
+        cy.get('#input-addOption').type(input1)
+        cy.get('#form-addOption').submit()
+
+        cy.get('#what-do').click()
+
+        cy.contains('Selected Option')
+            .type('{esc}')
+
+        cy.contains('Selected Option')
+            .should('not.exist')
+        cy.get('#closeModal')
+            .should('not.exist')
+
+
+        cy.get('#what-do').click()
+        cy.get('body').click('right')
+        cy.contains('Selected Option')
+            .should('not.exist')
+        cy.get('#closeModal')
+            .should('not.exist')
+
+
+
+
+
+    })
 
 })
 
