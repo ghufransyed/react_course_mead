@@ -115,7 +115,7 @@ describe('Test options', () => {
 
         cy.get('#option-1').contains(input2)
         cy.get('#btn-1').click()
-        cy.contains(input2).should('be.false')
+        cy.contains(input2).should('not.exist')
         cy.contains(input1)
         cy.contains(input3)
 

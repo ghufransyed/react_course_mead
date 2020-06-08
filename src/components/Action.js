@@ -1,7 +1,6 @@
 import React from "react";
 
-const Action = (props) => {
-    return (
+const Action = (props) => (
         <div>
             <button
                 id='what-do'
@@ -11,7 +10,6 @@ const Action = (props) => {
                 What should I do?
             </button>
         </div>
-    )
-};
+    );
 
 export { Action as default };
