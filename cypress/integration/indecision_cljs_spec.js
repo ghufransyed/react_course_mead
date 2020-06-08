@@ -1,9 +1,8 @@
-const target_url = 'http://localhost:8080'
+const target_url = 'http://localhost:8081'
 const input1 = 'one'
 const input2 = 'two'
 const input3 = 'three'
 const inputs = [input1,input2,input3]
-
 
 
 describe('Initial State', () => {
@@ -20,7 +19,7 @@ describe('Initial State', () => {
         cy.contains('button', "Add Option")
         cy.get('#input-addOption')
             .invoke('attr','placeholder' )
-            .should('equal', 'Enter option here')
+            .should('equal', 'Enter option text here')
         cy.get('#button-addOption').should('not.be.disabled')
     })
 })
@@ -30,6 +29,7 @@ describe('Add Option', () => {
     it('New option is rendered', () => {
         cy.visit(target_url)
         cy.clearLocalStorage()
+        cy.visit(target_url)
         cy.get('#input-addOption').type(input1)
         cy.get('#form-addOption').submit()
         cy.get('#input-addOption')
@@ -45,7 +45,7 @@ describe('Add Empty and duplicate Option', () => {
         cy.visit(target_url)
         cy.clearLocalStorage()
         cy.get('#form-addOption').submit()
-        cy.contains('Enter valid value to add item')
+        cy.contains( 'Sorry, that is not a valid entry')
         cy.get('#input-addOption').type(input1)
         cy.get('#form-addOption').submit()
         cy.contains(input1)
@@ -61,7 +61,7 @@ describe('Add Empty and duplicate Option', () => {
         cy.contains(input2)
         cy.get('#error-msg-addOption')
             .should('not.exist')
-        cy.contains('Enter valid value to add item')
+        cy.contains('Sorry, that is not a valid entry' )
             .should('not.be.true')
 
     })
@@ -113,7 +113,9 @@ describe('Test options', () => {
 
         cy.get('#option-1').contains(input2)
         cy.get('#btn-1').click()
-        cy.contains(input2).should('not.be.true')
+        cy.contains(input2).should('not.exist')
+        cy.contains(input1).should('exist')
+        cy.contains(input3).should('exist')
 
     })
 
@@ -158,12 +160,12 @@ describe('Test options', () => {
         cy.contains('Selected Option')
         cy.get('#picked-option')
             .should(($p) => {
-            const text = $p.text()
-            expect(text)
-                .to.be.oneOf(JSON.parse(
-                    localStorage.getItem('options')))
-            }
-        )
+                    const text = $p.text();
+
+                    expect(text)
+                        .to.be.oneOf(inputs)
+                }
+            )
 
         cy.get('#closeModal')
             .contains("Okay")
@@ -199,10 +201,6 @@ describe('Test options', () => {
             .should('not.exist')
         cy.get('#closeModal')
             .should('not.exist')
-
-
-
-
 
     })
 

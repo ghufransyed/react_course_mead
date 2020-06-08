@@ -45,7 +45,7 @@ class IndecisionApp extends React.Component {
 
     handleAddOption = (newOption) =>  {
         if (!newOption) {
-            return 'Enter valid value to add item';
+            return 'Sorry, that is not a valid entry';
         } else if (this.state.options.indexOf(newOption) > -1) {
             return 'This item already exists';
         }

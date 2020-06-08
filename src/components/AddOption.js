@@ -35,7 +35,7 @@ export default class AddOption extends React.Component {
                        id='input-addOption'
                        type="text"
                        name="addOption"
-                       placeholder="Enter option here"></input>
+                       placeholder="Enter option text here"></input>
                     <button
                         id='button-addOption'
                         type="submit">Add Option</button>
